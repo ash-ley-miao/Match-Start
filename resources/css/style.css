@@ -4,25 +4,30 @@ html {
   background-color: rgb(255, 242, 242);
 }
 
+body {
+  padding-bottom: 5.25rem;
+}
+
 html,
 body,
 .container {
-  background-color: rgb(255, 242, 242);
+  background-color: rgba(255, 242, 242, 0.2);
 }
 
 .container {
   margin-top: 5.25rem;
 }
+
 .container h1 {
   font-weight: bold;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: rgb(32, 64, 86);
   margin-bottom: 2rem;
 }
 
 .container h5 {
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin: 0.75rem 0rem;
 }
 
@@ -32,18 +37,88 @@ body,
 
 #game .card {
   display: flex;
-  border: 4px solid #ffffff;
-  height: 12.5rem;
+  border: 4px solid rgb(255, 242, 242);
   border-radius: 8px;
   background-color: rgb(32, 64, 86);
   font-weight: 900;
-  font-size: 7rem;
   color: rgb(255, 255, 255);
   text-align: center;
   align-items: center;
   justify-content: center;
 }
 
+.smallestTile {
+  height: 5rem;
+  font-size: 2rem;
+  border: 2px solid rgba(255, 242, 242, 1) !important;
+}
+
+.smallTile {
+  height: 10rem;
+  font-size: 5.75rem;
+}
+
+.mediumTile {
+  height: 12.5rem;
+  font-size: 7rem;
+}
+
+.bigTile {
+  height: 17rem;
+  font-size: 10rem;
+}
+
 .card:hover {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 992px) {
+  #game {
+    margin: 3rem 0rem;
+  }
+  .container {
+    margin-top: 2rem;
+  }
+}
+
+.tiles-form {
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: column;
+}
+
+.tiles-button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.33rem;
+}
+
+span {
+  font-size: 1.75rem;
+  padding: 0.5rem 0.5rem;
+  background-color: rgba(255, 127, 0, 0.5);
+  border-radius: 3px;
+  box-shadow: 2px 2px 3px;
+  transition: border 0.2s ease-out;
+}
+
+span:hover {
+  border: 1px dotted white;
+  font-weight: bold;
+}
+
+#twoTiles {
+  background-color: rgba(255, 197, 0, 0.7);
+}
+
+#fourTiles {
+  background-color: rgba(255, 127, 0, 0.63);
+}
+
+#sixTiles {
+  background-color: rgba(255, 127, 0, 0.8);
+}
+
+#twelveTiles {
+  background-color: rgba(255, 50, 0, 0.9)
 }

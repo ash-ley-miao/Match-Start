@@ -1,22 +1,35 @@
-$(document).ready(function() {
-  MatchGame.renderCards(MatchGame.generateCardValues(), $('#game'));
-});
-
-var MatchGame = {};
 
 /*
   Sets up a new game after HTML document has loaded.
   Renders a 4x4 board of cards.
 */
 
+$(document).ready(function() {
+  $("#twoTiles").click(function () {
+    MatchGame.renderCards(MatchGame.generateCardValues(2), $('#game'));
+  });
+  $("#fourTiles").click(function () {
+    MatchGame.renderCards(MatchGame.generateCardValues(4), $('#game'));
+    tiles = 4;
+  });
+  $("#sixTiles").click(function () {
+    MatchGame.renderCards(MatchGame.generateCardValues(6), $('#game'));
+  });
+  $("#twelveTiles").click(function () {
+    MatchGame.renderCards(MatchGame.generateCardValues(12), $('#game'));
+  });
+});
 
+var MatchGame = {};
+var sideLength;
 /*
   Generates and returns an array of matching card values.
  */
 
-MatchGame.generateCardValues = function () {
+MatchGame.generateCardValues = function(tiles) {
+ sideLength = tiles;
  var orderedValues = [];
- for (var i=1; i <= 8; i++)
+ for (var i=1; i <= (tiles*tiles)/2; i++)
  {
    orderedValues.push(i);
    orderedValues.push(i);
@@ -37,22 +50,40 @@ MatchGame.generateCardValues = function () {
   object.
 */
 
-MatchGame.renderCards = function(cardValues, $game) {
+MatchGame.renderCards = function(cardValues, $game, tiles) {
   $game.data('flippedCards', []);
 
   var colorsOnClick = ["hsl(24, 85%, 65%)", "hsl(55, 85%, 65%)", "hsl(90, 85%, 65%)", "hsl(160, 85%, 65%)",
-    "hsl(220, 85%, 65%)", "hsl(265, 85%, 65%)", "hsl(310, 85%, 65%)", "hsl(360, 85%, 65%)"];
+    "hsl(220, 85%, 65%)", "hsl(265, 85%, 65%)", "hsl(310, 85%, 65%)", "hsl(360, 85%, 65%)",
+    "hsl(70, 85%, 65%)", "hsl(120, 85%, 65%)", "hsl(240, 85%, 65%)", "hsl(335, 85%, 65%)"];
 
   $game.empty();
 
   for (var i = 0; i < cardValues.length; i++)
   {
-    var newCard = $('<div class="card col-xs-3"></div>');
+    console.log(i);
+    var newCard;
+
+    console.log(sideLength);
+    if (sideLength === 2) {
+      newCard = $('<div class="card bigTile col-xs-6"></div>');
+    }
+    if (sideLength === 4) {
+      newCard = $('<div class="card mediumTile col-xs-3"></div>');
+    }
+    if (sideLength === 6) {
+      newCard = $('<div class="card smallTile col-xs-2"></div>');
+    }
+    if (sideLength === 12) {
+      newCard = $('<div class="card smallestTile col-xs-1"></div>');
+    }
+
     newCard.data("value", cardValues[i]);
     newCard.data("isFlipped", false);
-    newCard.data("color", colorsOnClick[cardValues[i]-1]);
+    newCard.data("color", colorsOnClick[(cardValues[i]-1)%12]);
     $game.append(newCard);
   }
+
 
   if ($game.data('flippedCards') < 2)
   {
